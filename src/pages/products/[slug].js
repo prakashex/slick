@@ -26,8 +26,7 @@ export default function ProductPage({ product }) {
           </section>
         </section>
         <section>
-          {" "}
-          <PromoCard />{" "}
+          <PromoCard />
         </section>
       </article>
     </section>
