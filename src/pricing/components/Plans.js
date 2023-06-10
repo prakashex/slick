@@ -1,5 +1,13 @@
+import { useState } from "react";
+
 export default function Plans({ plans }) {
-  const plan = plans[0];
+  const [selected, setSelected] = useState("year");
+  const plan = plans.find((plan) => plan.interval === selected);
+
+  const togglePlan = () => {
+    const interval = selected === "year" ? "month" : "year";
+    console.log(setSelected(interval));
+  };
 
   return (
     <div className="bg-salmon border-right">
@@ -11,7 +19,7 @@ export default function Plans({ plans }) {
                 <div className="plan-switch">
                   Monthly
                   <label className="switch">
-                    <input type="checkbox" />
+                    <input onChange={togglePlan} type="checkbox" />
                     <span className="slider" />
                   </label>
                   Yearly
