@@ -20,7 +20,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    res.send({ success: true });
     switch (event.type) {
       case "customer.subscription.updated":
         await updateSubscription(event);
@@ -29,6 +28,7 @@ export default async function handler(req, res) {
         await deleteSubscription(event);
         break;
     }
+    res.send({ success: true });
   } catch (error) {
     console.log("error ---> ", err.message);
     res.send({ success: false });
@@ -45,6 +45,7 @@ async function updateSubscription(event) {
     .select("*")
     .eq("stripe_customer_id", stripe_customer_id)
     .single();
+  console.log("value of profile weather it exists or not", profile);
   if (profile) {
     const updatedSubscription = {
       subscription_status,
@@ -65,12 +66,28 @@ async function updateSubscription(event) {
       subscription_status,
       price,
     };
-    await supabase.auth.admin.createUser({
+    console.log("new profile object ---> ", newProfile);
+   const createUserRequest =  await supabase.auth.admin.createUser({
       email,
       email_confirm: true,
       user_metadata: newProfile,
     });
+    console.log("create user --> ",createUserRequest)
   }
 }
 
-async function deleteSubscription(event) {}
+async function deleteSubscription(event) {
+  const subscription = event.data.object;
+  const stripe_customer_id = subscription.customer;
+  const subscription_status = subscription.status;
+
+  const deletedSubscription = {
+    subscription_status,
+    price: null
+  }
+
+  await supabase
+  .from("profile")
+  .update(deleteSubscription)
+  .eq("stripe_customer_id", stripe_customer_id)
+}
