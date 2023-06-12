@@ -3,7 +3,8 @@ import Meta from "../components/Meta";
 import Navbar from "../components/Navbar";
 
 
-const hideNavbarPages = ["/success","/login"];
+// const hideNavbarPages = ["/success", "/login"];
+const hideNavbarPages = ["/success"]
 
 export default function AppLayout({ children }) {
   const router = useRouter();

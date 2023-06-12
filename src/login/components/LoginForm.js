@@ -1,9 +1,9 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 
-export default function LoginForm() {
+export default function LoginForm({setSubmitted}) {
   const [error , setError] = useState('')
-  const [isloading , setIsLoading] = useState(false)
+  const [isLoading , setIsLoading] = useState(false)
 const supabaseClient = useSupabaseClient();
 
 async function onSubmit(event) {
@@ -26,6 +26,7 @@ async function onSubmit(event) {
   }else{
       setError('')
       setIsLoading(false)
+      setSubmitted(email)
   }
 }
 return (
@@ -41,7 +42,7 @@ return (
       <input type="email" id="email" name="email" autoComplete="email" />
     </section>
     <button type="submit" className="large-button">
-      <div className="large-button-text">Login</div>
+      <div className="large-button-text">{isLoading ? "Logging in..." : "Log in"}</div>
     </button>
   </form>
 );
