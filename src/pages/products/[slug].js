@@ -1,6 +1,6 @@
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import PromoCard from "src/products/components/PromoCard";
 import SubscriberCard from "src/products/components/SubscriberCard";
