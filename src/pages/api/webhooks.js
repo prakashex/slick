@@ -19,12 +19,14 @@ export default async function handler(req, res) {
     return res.status(400).end();
   }
 
+  console.log("event type ------> ",event.type)
+
   try {
     switch (event.type) {
       case "customer.subscription.updated":
         await updateSubscription(event);
         break;
-      case "customer.subscripton.deleted":
+      case "customer.subscription.deleted":
         await deleteSubscription(event);
         break;
     }
@@ -77,17 +79,24 @@ async function updateSubscription(event) {
 }
 
 async function deleteSubscription(event) {
+  console.log("deleted event")
   const subscription = event.data.object;
+  console.log("subscription --> ",subscription)
   const stripe_customer_id = subscription.customer;
   const subscription_status = subscription.status;
+  console.log("stripe customer id --> subscription status -->",stripe_customer_id , subscription_status)
+
 
   const deletedSubscription = {
     subscription_status,
     price: null
   }
 
+  console.log("deleted subscription --> ",deleteSubscription)
+  console.log("stripe customer id ",stripe_customer_id)
+
   await supabase
   .from("profile")
-  .update(deleteSubscription)
+  .update(deletedSubscription)
   .eq("stripe_customer_id", stripe_customer_id)
 }

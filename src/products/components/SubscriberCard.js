@@ -1,1 +1,13 @@
-export default function SubscriberCard() {}
+export default function SubscriberCard() {
+    return (
+        <section>
+            <div>
+                <h4> See All Products </h4>
+                <p style={{fontSize: '1rem'}}> Go back to see the entire catalogue.</p>
+            </div>
+            <Link href="/products" className="primay button">
+                Back to Products
+            </Link>
+        </section>
+    )
+}
