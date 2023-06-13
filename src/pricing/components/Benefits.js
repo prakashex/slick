@@ -18,8 +18,8 @@ export default function Benefits() {
     <div className="bg-white">
       <div className="column-padding">
         <div className="content-grid xl">
-          {benefits.map((benifit) => (
-            <div className="spacing-base">
+          {benefits.map((benifit , index) => (
+            <div key={index} className="spacing-base">
               <h3 className="font-extrabold text-4xl">
                 {benifit.title }
                 <br />
