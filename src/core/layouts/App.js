@@ -9,7 +9,7 @@ const hideNavbarPages = ["/success"]
 export default function AppLayout({ children }) {
   const router = useRouter();
   const hideNavbar = hideNavbarPages.includes(router.asPath);
-  console.log("hidenavbar -->", hideNavbar);
+
 
   return (
     <>

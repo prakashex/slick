@@ -18,7 +18,7 @@ async function onSubmit(event) {
     },
   });
 
-  console.log("error login form",error)
+
   if(error){
       setError(error.message)
       setIsLoading(false)

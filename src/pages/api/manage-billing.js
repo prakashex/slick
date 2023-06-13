@@ -14,7 +14,6 @@ export default async function handler(req, res) {
     data: { user },
   } = await supabaseServerClient.auth.getUser();
 
-  console.log("user --> ", user);
 
   if (!user) {
     return res.status(401).send("Unauthorized");

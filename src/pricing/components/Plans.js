@@ -9,6 +9,7 @@ export default function Plans({ plans }) {
 
   const togglePlan = () => {
     const interval = selected === "year" ? "month" : "year";
+    setSelected(interval)
   };
 
   async function onCheckout(){

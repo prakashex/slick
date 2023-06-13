@@ -19,7 +19,6 @@ export default async function handler(req, res) {
     return res.status(400).end();
   }
 
-  console.log("event type ------> ",event.type)
 
   try {
     switch (event.type) {
@@ -47,7 +46,6 @@ async function updateSubscription(event) {
     .select("*")
     .eq("stripe_customer_id", stripe_customer_id)
     .single();
-  console.log("value of profile weather it exists or not", profile);
   if (profile) {
     const updatedSubscription = {
       subscription_status,
@@ -68,32 +66,24 @@ async function updateSubscription(event) {
       subscription_status,
       price,
     };
-    console.log("new profile object ---> ", newProfile);
    const createUserRequest =  await supabase.auth.admin.createUser({
       email,
       email_confirm: true,
       user_metadata: newProfile,
     });
-    console.log("create user --> ",createUserRequest)
   }
 }
 
 async function deleteSubscription(event) {
-  console.log("deleted event")
   const subscription = event.data.object;
-  console.log("subscription --> ",subscription)
   const stripe_customer_id = subscription.customer;
   const subscription_status = subscription.status;
-  console.log("stripe customer id --> subscription status -->",stripe_customer_id , subscription_status)
 
 
   const deletedSubscription = {
     subscription_status,
     price: null
   }
-
-  console.log("deleted subscription --> ",deleteSubscription)
-  console.log("stripe customer id ",stripe_customer_id)
 
   await supabase
   .from("profile")

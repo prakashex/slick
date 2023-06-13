@@ -4,7 +4,6 @@ import { stripe } from "src/pricing/utils/stripe";
 
 
 export default function PricingPage({plans}) {
-console.log("plans --> ",plans)
 return (
     <div className="grid-halves h-screen-navbar">
         <Plans plans={plans} />
