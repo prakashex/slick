@@ -13,7 +13,7 @@ export default function Navbar() {
 
 
   async function onManageBilling(){
-    const response = await fetch(`${SITE_URL}/api/manage-billing`);
+    const response = await fetch(`/api/manage-billing`);
     const data = await response.json();
     if(data){
         window.location.href = data.url;
