@@ -2,13 +2,16 @@ import Link from "next/link";
 import Logo from "./Logo";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { SITE_URL } from "src/pricing/utils";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
   const session = useSession();
   const supabaseClient = useSupabaseClient()
+  const router = useRouter()
 
   function signOut(){
     supabaseClient.auth.signOut()
+    router.reload(window.location.pathname)
   }
 
 
